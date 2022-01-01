@@ -1,0 +1,37 @@
+﻿@model MyBlog.Models.Login
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 jumbotron">
+            <p class="alert text-danger text-center">@ViewBag.Message</p>
+            <h3 class="text-center">Giriş</h3>
+            @using (Html.BeginForm("Login", "Account",new {ReturnUrl=Request.QueryString["ReturnUrl"], FormMethod.Post }))
+            {
+
+                <div>
+                    <label>Kullanıcı Adı</label>
+                    @Html.TextBoxFor(m => m.userName, new { @class = "form-control", @placholder = "Username" })
+                    @Html.ValidationMessageFor(m => m.userName, "")
+                </div>
+
+                <div>
+                    <label>Şifre</label>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "")
+                </div>
+                <div>
+
+                    <input name="RememberMe" type="checkbox"/>
+                </div>
+
+                <div>
+                    <button class="btn btn-info">Giriş</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

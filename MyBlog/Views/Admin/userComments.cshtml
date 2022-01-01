@@ -1,0 +1,42 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<MyBlog.Models.Comment>
+@{
+    ViewBag.Title = "userComments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Kullanıcı Adı</th>
+            <th>Yorum</th>
+            <th>Tarih</th>
+            <th>Makale</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Id</th>
+                <td>@User.Identity.Name</td>
+                @if (item.Description.Length > 20)
+                {
+                    <td>@item.Description.Substring(0, 20):(...)</td>
+                }
+                else
+                {
+                    <td>@item.Description</td>
+                }
+                <td>@item.Date</td>
+                <td>@item.Article.Title</td>
+                <td><a href="/Admin/Delete/@item.Id">Sil</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

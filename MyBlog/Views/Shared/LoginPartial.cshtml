@@ -1,0 +1,30 @@
+﻿<ul class="nav navbar-nav">
+
+    @if (Request.IsAuthenticated)
+    {
+        if (this.User.IsInRole("admin"))
+        {
+            <li><a href="/Admin/Index">Admin</a></li>
+            <li><a href="/Account/Profil">@User.Identity.Name</a></li>
+            <li><a href="/Article/Index">Makalelerim</a></li>
+            <li><a href="/Article/Create">Makale Yaz</a></li>
+            <li><a href="/Account/LogOut/">Çıkış</a></li>
+
+        }
+        else
+        {
+            <li><a href="/Account/Profil">@User.Identity.Name</a></li>
+            <li><a href="/Article/Index">Makalelerim</a></li>
+            <li><a href="/Article/Create">Makale Yaz</a></li>
+            <li><a href="/Account/LogOut/">Çıkış</a></li>
+        }
+
+    }
+
+    else
+    {
+        <li><a href="/Account/Login">Giriş</a></li>
+        <li><a href="/Account/Register">Kayıt Ol</a></li>
+    }
+
+</ul>

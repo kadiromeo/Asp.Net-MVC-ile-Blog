@@ -1,0 +1,48 @@
+﻿@model MyBlog.Models.ProfileChange
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 jumbotron">
+            <p class="alert text-success text-center">@ViewBag.Message</p>
+            <h3 class="text-center">Profil Ayarlarım</h3>
+            @using (Html.BeginForm("Profil", "Account", FormMethod.Post))
+            {
+                <div>
+                    @Html.HiddenFor(m=>m.Id)
+                </div>
+                <div>
+                    <label>Ad</label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placholder = "Name" })
+                    @Html.ValidationMessageFor(m => m.Name, "")
+                </div>
+
+                <div>
+                    <label>Soyad</label>
+                    @Html.TextBoxFor(m => m.Surname, new { @class = "form-control", @placholder = "Surname" })
+                    @Html.ValidationMessageFor(m => m.Surname, "")
+                </div>
+
+                <div>
+                    <label>Kullanıcı adı</label>
+                    @Html.TextBoxFor(m => m.userName, new { @class = "form-control", @placholder = "Username" })
+                    @Html.ValidationMessageFor(m => m.userName, "")
+                </div>
+
+                <div>
+                    <label>E-Mail</label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placholder = "E-mail" })
+                    @Html.ValidationMessageFor(m => m.Email, "")
+                </div>
+
+                <div>
+                    <button class="btn btn-info">Güncelle</button>
+                    <a href="/Account/ChangePassword">Şifremi Değiştir</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+﻿@model MyBlog.Models.Comment
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<article>
+    <div class="post-image">
+        <div class="post-heading">
+            <h3>@ViewBag.article.Title</h3>
+        </div>
+        <img src="@ViewBag.article.Image" alt="" />
+    </div>
+    <p>
+        @ViewBag.article.Description
+    </p>
+    <div class="row">
+        <div class="col-md-3">
+            @{int a = 1; }
+            <script>
+                    $(function () {
+                        $('#@("puan" + a)').rateYo({
+                            rating:@ViewBag.sub,
+                            readOnly: true,
+                            multiColor: {
+
+                                "startColor": "#FF0000", //RED
+                                "endColor": "#00FF00"  //GREEN
+                            }
+                        })
+
+                    })
+
+            </script>
+            <div id="@("puan"+a)">
+
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            [@ViewBag.sub] @ViewBag.sayi
+        </div>
+
+        <div class="col-md-3"></div>
+
+        <div class="col-md-4">
+            <h4>(<i class="fas fa-comment">@ViewBag.sayi</i>)</h4>
+        </div>
+    </div>
+
+
+    <div>
+        <h3>Yorumlar</h3>
+        @{int i = 1; }
+        @foreach (var item in ViewBag.article.Comments)
+        {
+            <div class="text-center">
+                <img src="~/Upload/Images/user.png" width="30" height="30" style="border-radius:50%"/>
+               <strong>@item.userId</strong> (@item.Date)
+                <script>
+                    $(function () {
+                        $('#@("puanlar"+i)').rateYo({
+                            rating:@item.score,
+                            readOnly: true,
+                            multiColor: {
+
+                                "startColor": "#FF0000", //RED
+                                "endColor": "#00FF00"  //GREEN
+                            }
+                        })
+
+                    })
+
+                </script>
+                <div class="@("puanlar"+i)"></div>
+
+                <p>@item.Description</p>
+                <hr />
+            </div>
+        }
+        @if (Request.IsAuthenticated)
+        {
+            <h3 class="alert">Yorum Yap!</h3>
+
+            using (Html.BeginForm("CommendSend", "Home", FormMethod.Post, new { @class = "row" }))
+            {
+
+                <div id="PuanVer"></div>
+                <input type="hidden" id="rating" name="rating" />
+
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "" })
+                <br />
+                <button class="btn btn-info floatright">Gönder</button>
+                @Html.HiddenFor(model=>model.articleId)
+
+            }
+        }
+        else
+        {
+            <p class="alert alert-warning">Yorum yapabilmek için @Html.ActionLink("Giriş","Login","Account", new {ReturnUrl=Request.RawUrl},null) yapmanız gerekmektedir...!</p>
+        }
+    </div>
+
+</article>
+
+<script>
+
+
+    $(function () {
+
+        $("#PuanVer").rateYo({
+
+            rating: 0,
+            numStars: 5,
+            maxValue: 5,
+            fullStar: true,
+            multiColor: {
+
+                "startColor": "#FF0000", //RED
+                "endColor": "#00FF00"  //GREEN
+            },
+            onChange: function (rating, rateYoInstance) {
+                $("#rating").val(rating);
+            }
+        });
+
+    });
+
+
+</script>

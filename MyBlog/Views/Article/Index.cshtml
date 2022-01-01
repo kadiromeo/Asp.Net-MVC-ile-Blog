@@ -1,0 +1,93 @@
+﻿@model IEnumerable<MyBlog.Models.ArticleModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    @if (Model.Count() == 0)
+    {
+
+
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Uyarı!</strong>
+            Makaleniz bulunmamaktadır...!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+    }
+    else
+    {
+        <table class="table col-md-8">
+            <tr>
+
+                <th>
+                    Kullanıcı Adı
+                </th>
+                <th>
+                    Başlık
+                </th>
+
+                <th>
+                    Açıklama
+                </th>
+                <th>
+                    Tarih
+                </th>
+
+                <th>
+                    Onay
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        <label class="btn btn-primary btn-sm">@item.userName</label>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @item.Date.ToShortDateString()
+                    </td>
+
+                    <td>
+                        @if (item.confirm)
+                        {
+
+
+                            <label class="btn btn-sm btn-success">Evet</label>
+                        }
+                        else
+                        {
+                            <label class="btn btn-sm btn-danger">Hayır</label>
+
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Detay", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+
+
+
+
+
+</div>
+

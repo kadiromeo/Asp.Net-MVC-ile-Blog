@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MyBlog.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kategoriler</h2>
+
+<p>
+    @Html.ActionLink("Yeni Kategori Oluştur", "Create")
+</p>
+<table class="table">
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detay", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Sil", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

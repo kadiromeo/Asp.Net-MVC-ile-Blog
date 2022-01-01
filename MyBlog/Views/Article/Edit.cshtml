@@ -1,0 +1,115 @@
+﻿@model MyBlog.Models.Article
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Düzenle</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.userName,"Kullanıcı Adı", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control",@readonly="" } })
+            @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title,"Başlık", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Image,"Fotoğraf", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description,"Açıklama", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Date,"Tarih", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" ,@type="date"} })
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" style="display:none;">
+        @Html.LabelFor(model => model.Views, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Views, new { htmlAttributes = new { @class = "form-control", @Value = 0 } })
+            @Html.ValidationMessageFor(model => model.Views, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @if (this.User.IsInRole("admin"))
+    {
+
+<div class="form-group">
+    @Html.LabelFor(model => model.confirm,"Onay", htmlAttributes: new { @class = "control-label col-md-2" })
+
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.confirm)
+        @Html.ValidationMessageFor(model => model.confirm, "", new { @class = "text-danger" })
+
+    </div>
+</div>
+    }
+    else
+    {
+<div class="form-group" style="display:none;">
+    @Html.LabelFor(model => model.confirm, "Onay", htmlAttributes: new { @class = "control-label col-md-2" })
+
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.confirm)
+        @Html.ValidationMessageFor(model => model.confirm, "", new { @class = "text-danger" })
+
+    </div>
+</div>
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryId, "Kategori Adı", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Düzenle" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Geri Dön", "Index")
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<MyBlog.Models.Category>
+<ul class="cat">
+    @foreach (var item in Model)
+    {
+        <li><i class="icon-angle-right"></i><a href="/Home/ArticleList/@item.Id">@item.CategoryName</a><span>(@item.CategoryName.Count())</span></li>
+
+    }
+
+</ul>

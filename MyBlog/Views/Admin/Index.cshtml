@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3 class="text-center alert alert-info">Admin Paneli</h3>
+<div class=" row text-center">
+
+    <div class="col-md-3">
+        <div class="img-thumbnail">
+            <img src="~/Upload/Images/istas.png" width="70" height="70" />
+            <a class="btn btn-primary" href="/Admin/WriterList">Tüm Makaleler</a><br /><span class="badge bg-secondary">@ViewBag.sayi</span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="img-thumbnail">
+            <img src="~/Upload/Images/istas.png" width="70" height="70" />
+            <a class="btn btn-success" href="/Admin/ConfirmList">Onaylanmış </a> <br /><span class="badge bg-secondary">@ViewBag.confirm</span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="img-thumbnail">
+            <img src="~/Upload/Images/istas.png" width="70" height="70" />
+            <a class="btn btn-danger" href="/Admin/UnconfirmList">Onaylanmamış </a><br /><span class="badge bg-secondary">@ViewBag.unconfirm</span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="img-thumbnail">
+            <img src="~/Upload/Images/istas.png" width="70" height="70" />
+            <a class="btn btn-warning" href="/Category/Index">Kategoriler </a><br /> <span class="badge bg-secondary">@ViewBag.category</span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="img-thumbnail">
+            <img src="~/Upload/Images/istas.png" width="70" height="70" />
+            <a class="btn btn-brown" href="/Admin/userComments">Yorumlar </a><br /> <span class="badge bg-secondary">@ViewBag.comments</span>
+        </div>
+    </div>
+
+</div>

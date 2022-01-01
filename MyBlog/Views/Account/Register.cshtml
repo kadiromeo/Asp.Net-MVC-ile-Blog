@@ -1,0 +1,54 @@
+﻿@model MyBlog.Models.Register
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 jumbotron">
+            <p class="alert text-danger text-center">@ViewBag.Message</p>
+            <h3 class="text-center">Kayıt Ol</h3>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+            {
+
+                <div>
+                    <label>Ad</label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placholder = "Name" })
+                    @Html.ValidationMessageFor(m => m.Name, "")
+                </div>
+
+                <div>
+                    <label>Soyad</label>
+                    @Html.TextBoxFor(m => m.Surname, new { @class = "form-control", @placholder = "Surname" })
+                    @Html.ValidationMessageFor(m => m.Surname, "")
+                </div>
+
+                <div>
+                    <label>Kullanıcı Adı</label>
+                    @Html.TextBoxFor(m => m.userName, new { @class = "form-control", @placholder = "Username" })
+                    @Html.ValidationMessageFor(m => m.userName, "")
+                </div>
+
+                <div>
+                    <label>E-Mail</label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placholder = "E-mail" })
+                    @Html.ValidationMessageFor(m => m.Email, "")
+                </div>
+                <div>
+                    <label>Şifre</label>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "")
+                </div>
+                <div>
+                    <label>Şifre Tekrar</label>
+                    @Html.PasswordFor(m => m.Repassword, new { @class = "form-control", @placholder = "Repassword" })
+                    @Html.ValidationMessageFor(m => m.Repassword, "")
+                </div>
+                <div>
+                    <button class="btn btn-info">Kayıt</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

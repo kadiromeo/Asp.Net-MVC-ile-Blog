@@ -1,0 +1,85 @@
+﻿@model MyBlog.Models.Article
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div>
+        <h3>Silmek istediğinize emin misiniz?</h3>
+
+        <dl class="dl-horizontal">
+
+
+            <dt>
+                <label>Kullanıcı Adı</label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.userName)
+            </dd>
+
+            <dt>
+                <label>Başlık</label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                <label>Fotoğraf</label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Image)
+            </dd>
+
+            <dt>
+                <label>Açıklama</label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                <label>Tarih</label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+            <dt>
+                <label>Görüntülenme</label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Views)
+            </dd>
+
+            <dt>
+                <label>Onay</label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.confirm)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Sil" class="btn btn-default" /> |
+                @Html.ActionLink("Geri Dön", "Index")
+            </div>
+        }
+    </div>
+</div>
+
